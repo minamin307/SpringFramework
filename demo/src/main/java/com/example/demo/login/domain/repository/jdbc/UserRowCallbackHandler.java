@@ -2,8 +2,9 @@ package com.example.demo.login.domain.repository.jdbc;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -16,8 +17,8 @@ public class UserRowCallbackHandler implements RowCallbackHandler {
 
         try {
             File file = new File("sample.csv");
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(fw);
+            OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
+            BufferedWriter bw = new BufferedWriter(osw);
 
             do {
                 // ファイル編集
