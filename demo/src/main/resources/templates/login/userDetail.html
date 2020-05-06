@@ -1,0 +1,91 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8"></meta>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"rel="stylesheet"></link>
+    <script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+    <link th:href="@{/css/home.css}" rel="stylesheet"></link>
+</head>
+<body>
+    <div th:fragment="userDetail_contents">
+        <div class="col-sm-5">
+	        <div class="page-header">
+	            <h1>ユーザー詳細</h1>
+	        </div>
+	        <form method="post" th:action="@{/userDetail}" th:object="${signupForm}">
+		        <table class="table table-bordered table-hover">
+		            <tr>
+		                <th class="active col-sm-2">ユーザID</th>
+		                <td class="col-sm-3">
+			                <div class="form-group">
+			                    <input type="text" th:field="*{userId}"
+			                       class="form-control" readonly="readonly">
+			                </div>
+	                        <span class="text-danger" th:if="${#fields.hasErrors('userId')}"
+	                           th:errors="*{userId}">Error Message</span>
+		                </td>
+		            </tr>
+		            <tr>
+		                <th class="active">パスワード</th>
+		                <td>
+			                <div class="form-group">
+	                            <input type="text" th:field="*{password}"
+			                      class="form-control">
+			                </div>
+	                        <span class="text-danger" th:if="${#fields.hasErrors('password')}"
+	                           th:errors="*{password}">Error Message</span>
+			            </td>
+		            </tr>
+		            <tr>
+		                <th class="active">ユーザー名</th>
+		                <td>
+			                <div class="form-group">
+			                    <input type="text" th:field="*{userName}" class="form-control">
+			                </div>
+                            <span class="text-danger" th:if="${#fields.hasErrors('userName')}"
+                                th:errors="*{userName}">Error Message</span>
+		                </td>
+		            </tr>
+		            <tr>
+		                <th class="active">誕生日</th>
+		                <td>
+		                    <div class="form-group">
+		                        <input type="text" th:field="*{birthday}"
+		                           placeholder="yyyy/MM/dd" class="form-control">
+		                    </div>
+                            <span class="text-danger" th:if="${#fields.hasErrors('birthday')}"
+                                th:errors="*{birthday}">Error Message</span>
+		                </td>
+		            </tr>
+		            <tr>
+		                <th class="active">年齢</th>
+		                <td>
+		                    <div class="form-group">
+		                        <input type="text" th:field="*{age}" class="form-control">
+		                    </div>
+                            <span class="text-danger" th:if="${#fields.hasErrors('age')}"
+                                th:errors="*{age}">Error Message</span>
+		                </td>
+		            </tr>
+		            <tr>
+		                <th class="active">結婚</th>
+		                <td>
+		                   <div class="form-group">
+		                       <div th:each="item:${radioMarriage}">
+	    	                       <input type="radio" name="radioMarriage"
+			                        th:value="${item.value}" th:text="${item.key}"
+			                        th:field="*{marriage}">
+			                   </div>
+	                           <span class="text-danger" th:if="${#fields.hasErrors('marriage')}"
+	                               th:errors="*{marriage}">Error Message</span>
+			                </div>
+			            </td>
+		            </tr>
+		        </table>
+	            <button class="btn btn-info pull-right btn-lg" name="update">更新</button>
+	            <button class="btn btn-destroy btn-lg" name="delete">削除</button>
+		    </form>
+        </div>
+    </div>
+</body>
+</html>

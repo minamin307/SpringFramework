@@ -1,0 +1,43 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8"></meta>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"rel="stylesheet"></link>
+    <script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+    <link th:href="@{/css/home.css}" rel="stylesheet"></link>
+</head>
+<body>
+    <div th:fragment="userList_contents">
+        <div class="col-sm-10">
+	        <div class="page-header">
+	            <h1>ユーザー一覧</h1>
+	        </div>
+	        <table class="table table-bordered table-hover table-striped">
+	            <tr>
+	                <th class="info col-sm-2">ユーザID</th>
+	                <th class="info col-sm-2">ユーザー名</th>
+	                <th class="info col-sm-2">誕生日</th>
+	                <th class="info col-sm-2">年齢</th>
+	                <th class="info col-sm-2">結婚</th>
+	                <th class="info col-sm-2"></th>
+	            </tr>
+	            <tr th:each="user : ${userList}">
+	                <th th:text="${user.userId}"></th>
+	                <th th:text="${user.userName}"></th>
+	                <th th:text="${#dates.format(user.birthday,'YYYY/MM/dd')}"></th>
+	                <th th:text="${user.age}"></th>
+	                <th th:text="${user.marriage} ? '既婚' : '未婚'"></th>
+	                <th>
+	                    <form method="get" th:action="@{'/userDetail/' + ${user.userId}}">
+	                        <button class="btn btn-primary">詳細</button>
+	                    </form>
+	                </th>
+	            </tr>
+	        </table>
+	        <label th:text="'合計：' + ${userListCount} + '件'"></label><br>
+	        <label class="text-info" th:text="${result}">結果表示</label><br>
+	        <a class="btn btn-primary" th:href="@{'/userList/csv'}">CSV出力</a>
+	    </div>
+    </div>
+</body>
+</html>

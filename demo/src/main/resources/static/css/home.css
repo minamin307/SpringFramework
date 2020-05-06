@@ -1,0 +1,11 @@
+.sidebar {
+    background-color: #F4F5F7;
+    position: fixed;
+    top: 50px;
+    bottom: 0px;
+}
+
+.main {
+    position: fixed;
+    top: 50px;
+}

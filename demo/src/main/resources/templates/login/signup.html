@@ -1,0 +1,85 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"></meta>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"rel="stylesheet"></link>
+    <script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+    <title>signup</title>
+</head>
+<body>
+    <div class="col-sm-5">
+	    <div class="page-header">
+	        <h1>ユーザー登録画面</h1>
+	    </div>
+	    <form method="post" action="/signup" th:object="${signupForm}">
+		    <table class="table table-hover table-bordered">
+		        <tr>
+		            <th class="active col-sm-3">ユーザーID</th>
+		            <td>
+		                <div class="form-group">
+		                    <input type="text" class="form-control"
+		                        th:field="*{userId}">
+		                </div>
+		                <span class="text-danger" th:if="${#fields.hasErrors('userId')}"
+		                   th:errors="*{userId}">Error Message</span>
+		            </td>
+		        </tr>
+		        <tr>
+		            <th class="active">パスワード</th>
+		            <td>
+		                <div class="form-group">
+		                    <input type="password" class="form-control"
+		                        th:field="*{password}">
+		                </div>
+	                    <span class="text-danger" th:if="${#fields.hasErrors('password')}"
+	                       th:errors="*{password}">Error Message</span>
+		            </td>
+		        </tr>
+		        <tr>
+		            <th class="active">ユーザー名</th>
+		            <td>
+		                <div class="form-group">
+		                    <input type="text" th:field="*{userName}" class="form-control">
+	                    </div>
+	                    <span class="text-danger" th:if="${#fields.hasErrors('userName')}"
+	                       th:errors="*{userName}">Error Message</span>
+		            </td>
+		        </tr>
+		        <tr>
+		            <th class="active">誕生日</th>
+		            <td>
+		                <div class="form-group">
+			                <input type="text" placeholder="yyyy/MM/dd"
+			                    th:field="*{birthday}" class="form-control">
+			            </div>
+	                    <span class="text-danger" th:if="${#fields.hasErrors('birthday')}"
+	                       th:errors="*{birthday}">Error Message</span>
+		            </td>
+		        </tr>
+		        <tr>
+		            <th class="active">年齢</th>
+		            <td>
+		                <div class="form-group">
+		                    <input type="text" th:field="*{age}" class="form-control">
+	                    </div>
+	                    <span class="text-danger" th:if="${#fields.hasErrors('age')}"
+	                       th:errors="*{age}">Error Message</span>
+		            </td>
+		        </tr>
+		        <tr>
+		            <th class="active">結婚</th>
+		            <td>
+		                <div th:each="item : ${radioMarriage}">
+			                <input type="radio" th:text=${item.key}
+			                    th:value="${item.value}" th:field=*{marriage}>
+			            </div>
+	                    <span class="text-danger" th:if="${#fields.hasErrors('marriage')}"
+	                        th:errors="*{marriage}">Error Message</span>
+		            </td>
+		        </tr>
+		    </table>
+		    <button class="btn btn-primary">ユーザー登録</button>
+        </form>
+    </div>
+</body>
+</html>
